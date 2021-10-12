@@ -1,5 +1,13 @@
+#:: The only way into Paineel is through hard-coded values on character create.  Zone points have been removed.  
+#:: This is how we will move the player to the evil hut in Tox, and bind them, if they have created an evil Erudite
+
 sub EVENT_ENTERZONE {
-  if(($ulevel >= 15) && (!defined($qglobals{Wayfarer})) && ($client->GetStartZone()==$zoneid)) {
-    $client->Message(15, "A mysterious voice whispers to you, 'Yenlr Undraie has just joined the Wayfarers Brotherhood and has some information about them, and how you can start doing odd jobs for them. You looked like the heroic sort, so I wanted to contact you . . . discreetly.'");
-  }
+	if ($status < 101) {
+		#:: Reset the player's bind point to a location in Tox (ZoneID 38)
+		$client->SetBindPoint(38,-751.86,1093.01,-46.54);
+		$client->SetStartZone(38,-751.86,1093.01,-46.54);
+		quest::rebind(38,-751.86,1093.01,-46.54);
+		#:: Move the player to Tox
+		quest::movepc(38,-751.86,1093.01,-46.54,221);
+	}
 }

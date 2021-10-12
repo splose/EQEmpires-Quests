@@ -16,13 +16,13 @@ sub QuestHandIn{
 	my $NPCMESSAGE = $_[1];
 	my $NPCANIMATION = $_[2];
 	my $CaseItems = $_[3];
-	$Item1 = $_[4];
+	my $Item1 = $_[4];
 	my $ItemCount1 = $_[5];
-	$Item2 = $_[6];
+	my $Item2 = $_[6];
 	my $ItemCount2 = $_[7];
-	$Item3 = $_[8];
+	my $Item3 = $_[8];
 	my $ItemCount3 = $_[9];
-	$Item4 = $_[10];
+	my $Item4 = $_[10];
 	my $ItemCount4 = $_[11];
 	my $Reward = quest::varlink($RewardID);
 	if ($CaseItems == 4){ ###If there are four separate item cases

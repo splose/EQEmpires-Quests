@@ -1,17 +1,23 @@
-# Zone to OOT SirensBane event
-# Zone: Butcher
-# AngeloX
+#:: Butcherblock Mountains >> SirensBane (68228)
 
-sub EVENT_SPAWN
-{
-	$x = $npc->GetX();
-	$y = $npc->GetY();
-	quest::set_proximity($x - 40, $x + 40, $y - 40, $y + 40);
+sub EVENT_SPAWN {
+	#:: Create a proximity, 80 units across, 200 units tall, without proximity say
+	quest::set_proximity($x - 40, $x + 40, $y - 40, $y + 40, $z - 100, $z + 100, 0);
 }
 
-sub EVENT_ENTER
-{
-#	quest::selfcast("2279");
-	quest::emote ("'s spirit moves you to another land ...");
-	quest::movepc(69,-9193.3,386.7,5.2); # Zone: oot
+sub EVENT_WAYPOINT_ARRIVE {
+	#:: Match waypoint 1
+	if ($wp == 0) {
+		#:: Create a proximity, 80 units across, 100 units tall, without proximity say
+		quest::set_proximity($x - 40, $x + 40, $y - 40, $y + 40, $z - 100, $z + 100, 0);
+	}
+	#:: Match waypoint 2
+	elsif ($wp == 1) {
+		quest::clear_proximity();
+	}
+}
+
+sub EVENT_ENTER {
+	#:: Move client to Ocean of Tears (oot)
+	quest::movepc(69, 7582, -2090, 4, 384);
 }

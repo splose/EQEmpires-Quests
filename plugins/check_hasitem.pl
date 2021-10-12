@@ -1,50 +1,22 @@
-#plugin::check_hasitem($client, $item_id);
+#checks to see if player has item
+#useage plugin::check_hasitem($client, itemid);
 sub check_hasitem {
 	my $client = shift;
-	my $item_id = shift;
-	#my $body_count = $client->GetCorpseCount();
-	my @augment_slots = (
-		quest::getinventoryslotid("augsocket.begin")..quest::getinventoryslotid("augsocket.end")
-	);
-	#my @corpse_slots = (
-	#	quest::getinventoryslotid("possessions.begin")..quest::getinventoryslotid("possessions.end"),
-	#	quest::getinventoryslotid("generalbags.begin")..quest::getinventoryslotid("generalbags.end"),
-	#);
-	my @inventory_slots = (
-		quest::getinventoryslotid("possessions.begin")..quest::getinventoryslotid("possessions.end"),
-		quest::getinventoryslotid("generalbags.begin")..quest::getinventoryslotid("generalbags.end"),
-		quest::getinventoryslotid("bank.begin")..quest::getinventoryslotid("bank.end"),
-		quest::getinventoryslotid("bankbags.begin")..quest::getinventoryslotid("bankbags.end"),
-		quest::getinventoryslotid("sharedbank.begin")..quest::getinventoryslotid("sharedbank.end"),
-		quest::getinventoryslotid("sharedbankbags.begin")..quest::getinventoryslotid("sharedbankbags.end"),
-	);
-	foreach $slot_id (@inventory_slots) {
-		if ($client->GetItemAt($slot_id)) {
-			if ($client->GetItemIDAt($slot_id) == $item_id) {
-				return 1;
-			}
+	my $itemid = shift;
 
-			foreach $augment_slot (@augment_slots) {
-				if ($client->GetAugmentAt($slot_id, $augment_slot) && $client->GetAugmentIDAt($slot_id, $augment_slot) == $item_id) {
-					return 1;
-				}
+	my @slots = (0..30, 251..340, 2000..2023, 2030..2270, 2500..2501, 2531..2550, 9999);
+	foreach $slot (@slots) {
+		if ($client->GetItemIDAt($slot) == $itemid) {
+			return 1;
+		}
+
+		for ($i = 0; $i < 5; $i++) {
+			if ($client->GetAugmentIDAt($slot, $i) == $itemid) {
+				return 1;
 			}
 		}
 	}
-  	
-	#if ($body_count > 0) {
-	#	foreach $corpse_index (1..$body_count) {
-	#		$body_id = $client->GetCorpseID($corpse_index);
-	#		if ($body_id > 0) {
-	#			foreach $slot_id (@corpse_slots) {
-	#				if ($client->GetCorpseItemAt($body_id, $slot_id) == $item_id) {
-	#					return 1;
-	#				}
-	#			}
-	#		}
-	#	}
-  	#}
-  	return 0;
+	return 0;
 }
 
-return 1;
+1;

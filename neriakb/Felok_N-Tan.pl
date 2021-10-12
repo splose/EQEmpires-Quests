@@ -1,12 +1,31 @@
-sub EVENT_SAY { 
-if($text=~/Hail/i){
-quest::say("Welcome to my shop, $name. I am Felok N'Tan, master smith of steel and [adamantite plate] armors. I am also the creator of the [dragoon shields] favored by members of the Indigo Brotherhood.");
+sub EVENT_SAY {
+	if ($text=~/who.*king/i) {
+		quest::say("The mighty empire of the Teir'Dal is ruled by King Naythox Thex.  All hail Thex!");
+	}
+	elsif ($text=~/who.*the dead/i) {
+		quest::say("The Dead are the shadowknights and necromancers of Neriak.  They were formed by Queen Cristanos herself.  Even among the Teir'Dal they are feared and they keep to themselves within the Lodge of the Dead in the Third Gate.  I have heard they take orders only from the queen.");
+	}
+	elsif ($text=~/where.*lodge of the dead/i) {
+		quest::say("The Dead are the shadowknights and necromancers of Neriak.  They were formed by Queen Cristanos herself.  Even among the Teir'Dal they are feared and they keep to themselves within the Lodge of the Dead in the Third Gate.  I have heard they take orders only from the queen.");
+	}
+	elsif ($text=~/who.*queen cristanos/i) {
+		quest::say("Queen Cristanos is the queen of Neriak, of course!  She was the one who formed the necromancers and shadowknights into the guild called the Dead.");
+	}
+	elsif ($text=~/what.*indigo brotherhood/i) {
+		quest::say("In the Commons Quarter can be found the Indigo Brotherhood, Teir'Dal warriors.  They are the armies of King Naythox Thex and serve as the trainers of the Dreadguard and dragoons.  Why the masters chose to build the Cauldron of Hate in that area and not the Third Gate is an amazement to me.");
+	}
+	elsif ($text=~/what.*cauldron of hate/i) {
+		quest::say("In the Commons Quarter can be found the Indigo Brotherhood, Teir'Dal warriors.  They are the armies of King Naythox Thex and serve as the trainers of the Dreadguard and dragoons.  Why the masters chose to build the Cauldron of Hate in that area and not the Third Gate is an amazement to me.");
+	}
+	elsif ($text=~/what.*commons quarter/i) {
+		quest::say("You are in the Commons Quarter.  This quarter is designated for all common Teir'Dal.  You can find an abundance of merchants as well as the arena and warriors guild here.");
+	}
+	elsif ($text=~/what.*warriors guild/i) {
+		quest::say("Within this area you will find the Cauldron of Hate which is home to the Teir'Dal warriors.");
+	}
 }
-if($text=~/what adamantite plate/i){
-quest::say("Adamantite plate armor is forged in our unique Teir'Dal forge with our highly specialized smithing techniques. Each piece of adamantite plate requires the appropriate small plate section mold, a Teir'Dal smithy hammer, leather padding, adamantite chain jointing, and shadow temper. Visors, collars, bracers, and boots require one folded sheet of adamantite. Helms, pauldrons, girdles, vambraces, and gauntlets require two folded sheets of adamantite. Breastplates, cloaks, and greaves require three folded sheets of adamantite.");
-}
-if($text=~/what dragoon shields/i){
-quest::say("Dragoon shields can only be crafted in our unique Teir'Dal forge here in Neriak. If you desire to craft one, you will require a kite shield mold, two sheets of adamantite, a Teir'Dal smithy hammer, and some shadow temper. If you are a proud follower of our Lord of Hate you may wish to attempt to create a magical dragoon shield. In order to do so, you will need to forge a sapphire, imbued by a cleric, into the shield at the time of its creation."); }
-}
-#END of FILE Zone:neriakb  ID:41047 -- Felok_N`Tan 
 
+sub EVENT_ITEM {
+	#:: Return unused items
+	plugin::returnUnusedItems();
+}

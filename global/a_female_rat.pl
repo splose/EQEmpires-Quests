@@ -7,10 +7,9 @@
 #NPC ID: 56103,56082              #
 #Quest Status: Complete           #                                      
 ###################################
-# items: 10263
 sub EVENT_ITEM {
   if($item1=="10262"){
-    quest::summonitem(10263); # Item: Empty Infectious Vial
+    quest::summonitem(10263);
     quest::emote("injests the virulent substance and becomes ill.");
     quest::exp(200);
   }

@@ -1,16 +1,9 @@
-# Zone to Erud Crossing event
-# Zone: Erudnext
-# AngeloX
-
-sub EVENT_SPAWN
-{
-	$x = $npc->GetX();
-	$y = $npc->GetY();
-	quest::set_proximity($x - 40, $x + 40, $y - 40, $y + 40);
+sub EVENT_SPAWN {
+	#:: Create a proximity, 80 units across, 200 units tall, without proximity say
+	quest::set_proximity($x - 40, $x + 40, $y - 40, $y + 40, $z - 100, $z + 100, 0);
 }
 
-sub EVENT_ENTER
-{
-#	quest::selfcast("2279");
-	quest::movepc(98,716.9,-1771.8,3.2); # Zone: erudsxing
+sub EVENT_ENTER {
+	#:: Move client to Erud's Crossing (erudsxing)
+	quest::movepc(98, 716.9, -1771.8, 3.2);
 }

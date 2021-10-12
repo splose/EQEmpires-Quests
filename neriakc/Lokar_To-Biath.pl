@@ -1,9 +1,5 @@
-#:: Lokar_To-Biath.pl
-#:: Red Wine (Part of Tome of Ages)
-# items: 18200
-
 sub EVENT_COMBAT {
-	#:: Match combat state 1 - entered combat
+	#:: Combat state 1 is entered combat
 	if ($combat_state == 1) {
 		quest::say("Come and feel the blade of the Dark Bargainers.");
 	}
@@ -32,15 +28,81 @@ sub EVENT_ITEM {
 	if (plugin::takeCoin(0, 0, 70, 0)) {
 		quest::say("Take this note to the Scribe of Dal, and perhaps she will break her vow.");
 		#:: Give a 18200 - Note
-		quest::summonitem(18200); # Item: Note
+		quest::summonitem(18200);
 		#:: Ding!
 		quest::ding();
 		#:: Set factions
-		quest::faction(236, 10);			#:: + Dark Bargainers
-		quest::faction(334, 1);				#:: + Dreadguard Outer
-		quest::faction(370, 1);				#:: + Dreadguard Inner
+		quest::faction(236, 10);		#:: + Dark Bargainers
+		quest::faction(334, 1);			#:: + Dreadguard Outer
+		quest::faction(370, 1);			#:: + Dreadguard Inner
 		#:: Grant a small amount of experience
 		quest::exp(100);
+	}
+	#:: Match four 13030 - Red Wine
+	elsif (plugin::takeItems(13030 => 4)) {
+		#:: Match if faction is Indifferent or better
+		if ($faction <= 5) {
+			quest::say("Ah, yes, let me pray to our god.. Yes, Innoruuk has given me wisdom. A Scribe of Dal still exists, disguised as a barkeep in the Blind Fish. This information will not help you though, for she has sworn a [vow] of silence and will not speak of the Dal.");
+			#:: Ding!
+			quest::ding();
+			#:: Set factions
+			quest::faction(236, 40);	#:: + Dark Bargainers
+			quest::faction(334, 4);		#:: + Dreadguard Outer
+			quest::faction(370, 4);		#:: + Dreadguard Inner
+			#:: Grant a moderate amount of experience
+			quest::exp(2000);
+		}
+		else {
+			quest::say("Leave my sight at once! You are no friend to the Dark Bargainers.");
+			#:: Return four 13030 - Red Wine
+			quest::summonitem(13030);
+			quest::summonitem(13030);
+			quest::summonitem(13030);
+			quest::summonitem(13030);
+		}
+	}
+	#:: Match three 13030 - Red Wine
+	elsif (plugin::takeItems(13030 => 3)) {
+		#:: Match if faction is Indifferent or better
+		if ($faction <= 5) {
+			quest::say("Ah, yes, let me pray to our god.. Yes, Innoruuk has given me wisdom. A Scribe of Dal still exists, disguised as a barkeep in the Blind Fish. This information will not help you though, for she has sworn a [vow] of silence and will not speak of the Dal.");
+			#:: Ding!
+			quest::ding();
+			#:: Set factions
+			quest::faction(236, 30);	#:: + Dark Bargainers
+			quest::faction(334, 3);		#:: + Dreadguard Outer
+			quest::faction(370, 3);		#:: + Dreadguard Inner
+			#:: Grant a moderate amount of experience
+			quest::exp(1500);
+		}
+		else {
+			quest::say("Leave my sight at once! You are no friend to the Dark Bargainers.");
+			#:: Return three 13030 - Red Wine
+			quest::summonitem(13030);
+			quest::summonitem(13030);
+			quest::summonitem(13030);
+		}
+	}
+	#:: Match two 13030 - Red Wine
+	elsif (plugin::takeItems(13030 => 2)) {
+		#:: Match if faction is Indifferent or better
+		if ($faction <= 5) {
+			quest::say("Ah, yes, let me pray to our god.. Yes, Innoruuk has given me wisdom. A Scribe of Dal still exists, disguised as a barkeep in the Blind Fish. This information will not help you though, for she has sworn a [vow] of silence and will not speak of the Dal.");
+			#:: Ding!
+			quest::ding();
+			#:: Set factions
+			quest::faction(236, 20);	#:: + Dark Bargainers
+			quest::faction(334, 2);		#:: + Dreadguard Outer
+			quest::faction(370, 2);		#:: + Dreadguard Inner
+			#:: Grant a moderate amount of experience
+			quest::exp(1000);
+		}
+		else {
+			quest::say("Leave my sight at once! You are no friend to the Dark Bargainers.");
+			#:: Return two 13030 - Red Wine
+			quest::summonitem(13030);
+			quest::summonitem(13030);
+		}
 	}
 	#:: Match one 13030 - Red Wine
 	elsif (plugin::takeItems(13030 => 1)) {
@@ -50,22 +112,22 @@ sub EVENT_ITEM {
 			#:: Ding!
 			quest::ding();
 			#:: Set factions
-			quest::faction(236, 10);		#:: + Dark Bargainers
-			quest::faction(334, 1);			#:: + Dreadguard Outer
-			quest::faction(370, 1);			#:: + Dreadguard Inner
+			quest::faction(236, 10);	#:: + Dark Bargainers
+			quest::faction(334, 1);		#:: + Dreadguard Outer
+			quest::faction(370, 1);		#:: + Dreadguard Inner
 			#:: Grant a small amount of experience
-			quest::exp(150);
+			quest::exp(500);
 		}
 		else {
 			quest::say("Leave my sight at once! You are no friend to the Dark Bargainers.");
+			#:: Return one 13030 - Red Wine
+			quest::summonitem(13030);
 		}
 	}
-	#:: Return unused items
+  	#:: Return unused items
 	plugin::returnUnusedItems();
 }
 
 sub EVENT_DEATH_COMPLETE {
      quest::say("The death of a Dark Bargainer never goes unnoticed!");
 }
-
-#:: END of FILE Zone:neriakc  ID:42037 -- Lokar_To`Biath

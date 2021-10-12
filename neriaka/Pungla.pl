@@ -1,4 +1,3 @@
-# items: 13382
 sub EVENT_SAY {
 	if ($text=~/hail/i) {
 		quest::say("Welcome! Drink you shall, some of de finest drinks of da lands! [Flaming Pungla] I suggest to you. It all me sells.");
@@ -13,7 +12,7 @@ sub EVENT_ITEM {
 	if (plugin::takeCoin(0, 0, 3, 0)) {
 		quest::say("Bottoms up!!");
 		#:: Give a 13382 - Flaming Pungla
-		quest::summonitem(13382); # Item: Flaming Pungla
+		quest::summonitem(13382);
 		#:: Ding!
 		quest::ding();
 	}

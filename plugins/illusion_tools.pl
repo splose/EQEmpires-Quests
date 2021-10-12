@@ -1,15 +1,13 @@
 #::: Author: Trevius
-#::: Updated: (16Feb2021)
 #::: Usage: plugin::RandomFeatures(Mob);
 #::: Description: Chooses a random set of facial features for playable races (NPCs or Players)
 
-sub RandomFeatures
-{
+sub RandomFeatures {
 	my $Mob = $_[0];
 
 	if ($Mob)
 	{
-		my $MobRace = $Mob->GetRace();
+		$MobRace = $Mob->GetRace();
 		
 		if ($MobRace <= 12 || $MobRace == 128 || $MobRace == 130 || $MobRace == 330 || $MobRace == 522)
 		{
@@ -34,12 +32,12 @@ sub RandomFeatures
 			$LuclinFace = plugin::RandomRange(0, 7);
 			
 			# Adjust all settings based on the min and max for each feature of each $MobRace and $Gender
-			#plugin::Debug("About to start the if statements.");
-			#use Switch; # The switch feature was not working. I "Switched" haha to a "if" structure. I have learned that the switch is depreciated? in Perl.
+			#plugin::Debug("About to switch case");
+			use Switch;
 
-			if ($MobRace)
+			switch ($MobRace)
 			{
-				if ($MobRace == 1)
+				case (1)
 				{
 					# Human
 					$HairColor = plugin::RandomRange(0, 19);
@@ -52,7 +50,7 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 2);
 					}
 				}
-				if ($MobRace == 2)
+				case (2)
 				{
 					# Barbarian
 					$HairColor = plugin::RandomRange(0, 19);
@@ -66,7 +64,7 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 2);
 					}
 				}
-				if ($MobRace == 3)
+				case (3) 
 				{
 					# Erudite
 					if ($Gender == 0) { #
@@ -78,7 +76,7 @@ sub RandomFeatures
 						$LuclinFace = plugin::RandomRange(0, 87);
 					}
 				}
-				if ($MobRace == 4)
+				case (4) 
 				{
 					# WoodElf
 					$HairColor = plugin::RandomRange(0, 19);
@@ -89,7 +87,7 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 2);
 					}
 				}
-				if ($MobRace == 5) 
+				case (5) 
 				{
 					# HighElf
 					$HairColor = plugin::RandomRange(0, 14);
@@ -102,7 +100,7 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 2);
 					}
 				}
-				if ($MobRace == 6) 
+				case (6) 
 				{
 					# DarkElf
 					$HairColor = plugin::RandomRange(13, 18);
@@ -115,7 +113,7 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 2);
 					}
 				}
-				if ($MobRace == 7) 
+				case (7) 
 				{
 					# HalfElf
 					$HairColor = plugin::RandomRange(0, 19);
@@ -128,7 +126,7 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 2);
 					}
 				}
-				if ($MobRace == 8) 
+				case (8) 
 				{
 					# Dwarf
 					$HairColor = plugin::RandomRange(0, 19);
@@ -142,7 +140,7 @@ sub RandomFeatures
 						$LuclinFace = plugin::RandomRange(0, 17);
 					}
 				}
-				if ($MobRace == 9) 
+				case (9) 
 				{
 					# Troll
 					$EyeColor1 = plugin::RandomRange(0, 10);
@@ -152,7 +150,7 @@ sub RandomFeatures
 						$HairColor = plugin::RandomRange(0, 23);
 					}
 				}
-				if ($MobRace == 10) 
+				case (10) 
 				{
 					# Ogre
 					if ($Gender == 1) { #
@@ -160,7 +158,7 @@ sub RandomFeatures
 						$HairColor = plugin::RandomRange(0, 23);
 					}
 				}
-				if ($MobRace == 11) 
+				case (11) 
 				{
 					# Halfling
 					$HairColor = plugin::RandomRange(0, 19);
@@ -173,7 +171,7 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 2);
 					}
 				}
-				if ($MobRace == 12) 
+				case (12) 
 				{
 					# Gnome
 					$HairColor = plugin::RandomRange(0, 24);
@@ -186,22 +184,22 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 2);
 					}
 				}
-				if ($MobRace == 128) 
+				case (128) 
 				{
 					# Iksar
 					$LuclinFace = plugin::RandomRange(0, 9);
 				}
-				if ($MobRace == 130) 
+				case (130) 
 				{
 					# VahShir
 					$LuclinFace = plugin::RandomRange(0, 9);
 				}
-				if ($MobRace == 330) 
+				case (330) 
 				{
 					# Froglok
 					$LuclinFace = plugin::RandomRange(0, 9);
 				}
-				if ($MobRace == 522) 
+				case (522) 
 				{
 					# Drakkin
 					$HairColor = plugin::RandomRange(0, 3);
@@ -221,6 +219,7 @@ sub RandomFeatures
 						$HairStyle = plugin::RandomRange(0, 7);
 					}
 				}
+
 			}
 			#plugin::Debug("About to SendIllusion");
 			$Mob->SendIllusion($MobRace,$Gender,$Texture,$HelmTexture,$LuclinFace,$HairStyle,$HairColor,$Beard,$BeardColor,$DrakkinHeritage,$DrakkinTattoo,$DrakkinDetails); # ,$size

@@ -1,21 +1,16 @@
-# Part of quest for Rod of Insidious Glamour
-# items: 10085, 10086
-
 sub EVENT_SAY { 
-  if($text=~/Hail/i){
-    quest::say("Hello. I am Cynthia.");
-  }
+	if ($text=~/hail/i){
+		quest::say("Hello. I am Cynthia.");
+	}
 }
 
 sub EVENT_ITEM {
-
-  # A Glamour Stone
-  if(($gold >= 50) && plugin::check_handin(\%itemcount, 10085 => 1)) {
-    quest::say("I've done what I can to enchant your stone, but you will need to find Tarn Visilin in Highpass Keep to finish the enchantments.  Don't forget to pay him the same fee you gave me, or he may decide to keep the stone for himself!"); # Made this text up
-    quest::summonitem(10086); # Item: Glamour Stone
-  }
-  plugin::return_items(\%itemcount);
+	#:: Match 50 gold pieces, and a 10085 - Shining Stone
+	if (plugin::takeItemsCoin(0, 0, 50, 0, 10085 => 1)) {
+		quest::say("I have enchanted your shining stone. To get it further enchanted, take this stone to Tarn Visilin in High Keep. Tip him 50 golden coins and he will work his magic.");
+		#:: Give a 10086 - Glamour Stone
+		quest::summonitem(10086);
+		#:: Ding!
+		quest::ding();
+	}
 }
-
-# Quest by mystic414
-
